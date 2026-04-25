@@ -1,0 +1,18 @@
+{
+    "id": 138381837,
+    "name": "Reflect",
+    "author": "MRCL.",
+    "creators": ["MRCL."],
+    "verifier": "Rexzy",
+    "verification": "https://youtu.be/ozyXT0rhOcg",
+    "percentToQualify": "100",
+    "password": "Uncopylocked",
+    "records": [
+            {
+            "user": "Rexzy",
+            "link": "https://www.youtube.com/Temp",
+            "percent": 100,
+            "hz": 480
+            }
+    ]
+}

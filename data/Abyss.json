@@ -1,0 +1,12 @@
+{
+    "id": 123456789,
+    "name": "Abyss",
+    "author": "Rexzy",
+    "creators": ["Rexzy"],
+    "verifier": "Rexzy",
+    "verification": "https://www.youtube.com/temp",
+    "percentToQualify": "100",
+    "password": "Uncopylocked",
+    "records": [
+    ]
+}
