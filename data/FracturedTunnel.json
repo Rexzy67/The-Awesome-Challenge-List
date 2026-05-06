@@ -1,9 +1,9 @@
 {
     "id": 128356384,
     "name": "Fractured Tunnel",
-    "author": "Rexzy61",
-    "creators": ["Rexzy61"],
-    "verifier": "Rexzy61",
+    "author": "Rexzy",
+    "creators": ["Rexzy"],
+    "verifier": "Rexzy",
     "verification": "SOON",
     "percentToQualify": 100,
     "password": "Uncopylocked",
@@ -12,7 +12,7 @@
             "user": "ACapitalLGD",
             "link": "https://www.youtube.com/Temp",
             "percent": 100,
-            "hz": 120
+            "hz": 144
         }
     ]
 }
