@@ -12,7 +12,7 @@ export default {
         </main>
         <main v-else class="page-roulette">
             <div class="sidebar">
-                <p class="type-label-md" style="color: #aaa">
+                <p class="type-label-md sidebar-note">
                     Shameless copy of the Extreme Demon Roulette by <a href="https://matcool.github.io/extreme-demon-roulette/" target="_blank" rel="noopener noreferrer">matcool</a>.
                 </p>
                 <form class="options">
@@ -26,7 +26,7 @@ export default {
                     </div>
                     <Btn :disabled="!useMainList && !useExtendedList" @click.prevent="onStart">{{ levels.length === 0 ? 'Start' : 'Restart'}}</Btn>
                 </form>
-                <p class="type-label-md" style="color: #aaa">
+                <p class="type-label-md sidebar-note">
                     The roulette saves automatically.
                 </p>
                 <form class="save">
@@ -48,7 +48,7 @@ export default {
                             <div class="meta">
                                 <p>#{{ level.rank }}</p>
                                 <h2>{{ level.name }}</h2>
-                                <p style="color: #00b54b; font-weight: 700">{{ progression[i] }}%</p>
+                                <p class="progress-complete">{{ progression[i] }}%</p>
                             </div>
                         </div>
                         <!-- Current Level -->
@@ -64,7 +64,7 @@ export default {
                             <form class="actions" v-if="!givenUp">
                                 <input type="number" v-model.number="percentage" :placeholder="placeholder" :min="currentPercentage + 1" max=100>
                                 <Btn :disabled="!canSubmitPercentage" @click.prevent="onDone">Done</Btn>
-                                <Btn @click.prevent="onGiveUp" style="background-color: #e91e63;">Give Up</Btn>
+                                <Btn class="btn-danger" @click.prevent="onGiveUp">Give Up</Btn>
                             </form>
                         </div>
                         <!-- Results -->
@@ -83,7 +83,7 @@ export default {
                                 <div class="meta">
                                     <p>#{{ level.rank }}</p>
                                     <h2>{{ level.name }}</h2>
-                                    <p style="color: #d50000; font-weight: 700">{{ currentPercentage + 2 + i }}%</p>
+                                    <p class="progress-missed">{{ currentPercentage + 2 + i }}%</p>
                                 </div>
                             </div>
                         </template>

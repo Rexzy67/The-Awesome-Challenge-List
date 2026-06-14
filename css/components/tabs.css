@@ -1,5 +1,12 @@
 .tabs {
     display: flex;
+    background: var(--gradient-acrylic);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-inset);
+    overflow: hidden;
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
 }
 
 .tabs .tab{
@@ -11,18 +18,12 @@
     background-color: transparent;
     color: var(--color-on-background);
     border-bottom: 3px solid transparent;
-}
-
-.tabs .tab:first-child {
-    border-top-left-radius: 0.5rem;
-}
-
-.tabs .tab:last-child {
-    border-top-right-radius: 0.5rem;
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
 }
 
 .tabs .tab.selected{
-    border-bottom: 3px solid var(--color-on-background);
+    background-color: color-mix(in srgb, var(--color-secondary) 14%, transparent);
+    border-bottom: 3px solid var(--color-secondary);
 }
 
 .tabs .tab:hover{

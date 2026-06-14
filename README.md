@@ -29,7 +29,7 @@ Then open:
 http://localhost:8000
 ```
 
-## Editing list data
+## Editing list data (in forked repos etc.)
 
 The public list order lives in:
 

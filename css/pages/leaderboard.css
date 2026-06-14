@@ -19,8 +19,10 @@
 }
 .page-leaderboard .error-container .error {
     padding: 1rem;
-    background-color: var(--color-error);
+    background: linear-gradient(135deg, var(--color-error), color-mix(in srgb, var(--color-error) 70%, var(--color-accent)));
     color: var(--color-on-error);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-sm);
 }
 .page-leaderboard .board-container,
 .page-leaderboard .player-container {
@@ -29,12 +31,23 @@
 }
 .page-leaderboard .board-container {
     padding-inline: 1rem;
+    background: var(--color-surface-muted);
+    border-right: 1px solid var(--color-border);
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
 }
 .page-leaderboard .filters {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     margin-bottom: 1rem;
+    background: var(--gradient-acrylic);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
 }
 .page-leaderboard .filters label {
     display: flex;
@@ -52,39 +65,53 @@
 .page-leaderboard .board .rank {
     padding-block: 1rem;
     text-align: end;
+    color: var(--color-muted);
 }
 .page-leaderboard .board .total {
     padding: 1rem;
     text-align: end;
+    color: var(--color-muted);
 }
 .page-leaderboard .board .user {
     width: 100%;
 }
 .page-leaderboard .board .user button {
     width: 100%;
-    background-color: var(--color-background);
+    background: transparent;
     color: var(--color-on-background);
-    border: none;
-    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 0.75rem;
     padding: 1rem;
     text-align: start;
     word-break: normal;
     overflow-wrap: anywhere;
+    transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
 }
 .page-leaderboard .board .user button:hover {
     background-color: var(--color-background-hover);
+    border-color: var(--color-border);
     color: var(--color-on-background-hover);
     cursor: pointer;
+    box-shadow: var(--shadow-sm);
 }
 .page-leaderboard .board .user.active button {
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
+    background: var(--gradient-active);
+    border-color: color-mix(in srgb, var(--color-secondary) 45%, transparent);
+    color: white;
+    box-shadow: var(--shadow-sm);
 }
 .page-leaderboard .player {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding-right: 2rem;
+    background: var(--gradient-acrylic);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    margin-right: 2rem;
+    padding: 1.5rem;
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
 }
 .page-leaderboard .player.empty {
     justify-content: center;
@@ -97,10 +124,11 @@
     gap: 1rem;
 }
 .page-leaderboard .player .summary li {
-    background-color: var(--color-surface);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
+    border-radius: 0.875rem;
     padding: 1rem;
+    box-shadow: var(--shadow-inset);
 }
 .page-leaderboard .player .summary span {
     color: var(--color-muted);
@@ -122,6 +150,7 @@
 .page-leaderboard .player .table .rank p,
 .page-leaderboard .player .table .score p {
     text-align: end;
+    color: var(--color-muted);
 }
 .page-leaderboard .player .table .level {
     width: 100%;
@@ -146,8 +175,12 @@
         padding: 1rem;
     }
 
+    .page-leaderboard .board-container {
+        border-right: none;
+    }
+
     .page-leaderboard .player {
-        padding-right: 0;
+        margin-right: 0;
     }
 }
 

@@ -1,14 +1,14 @@
 .btn {
-    border: none;
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 42%, transparent);
     cursor: pointer;
     font: inherit;
     padding: 1rem;
     margin: 0;
-    background-color: var(--color-primary);
+    background: var(--gradient-active);
     color: var(--color-on-primary);
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 0.5rem 0 rgba(0, 0, 102, 0.5);
-    transition: transform 100ms ease;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
 }
 
 .btn:disabled {
@@ -18,4 +18,10 @@
 
 .btn:not(:disabled):hover:not(:active) {
     transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn.btn-danger {
+    background: linear-gradient(135deg, var(--color-error), var(--color-accent));
+    color: var(--color-on-error);
 }

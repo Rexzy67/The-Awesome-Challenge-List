@@ -10,8 +10,13 @@
 }
 
 .docs-header {
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 1.5rem;
+    background: var(--gradient-acrylic);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
 }
 
 .docs-header p {
@@ -34,8 +39,14 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    border-left: 3px solid var(--color-border);
-    padding-left: 1rem;
+    background: var(--gradient-acrylic);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid color-mix(in srgb, var(--color-secondary) 70%, var(--color-border));
+    border-radius: 0.875rem;
+    box-shadow: var(--shadow-sm);
+    padding: 1rem;
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
 }
 
 .docs-toc a {
@@ -93,22 +104,23 @@
 }
 
 .doc-section a {
-    color: var(--color-primary);
+    color: color-mix(in srgb, var(--color-secondary) 70%, var(--color-primary));
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
 
 .doc-section code {
-    background-color: var(--color-surface);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 0.375rem;
     padding: 0.1rem 0.3rem;
 }
 
 .doc-note {
-    background-color: var(--color-surface);
+    background: var(--gradient-acrylic);
     border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
+    border-radius: 0.875rem;
+    box-shadow: var(--shadow-inset);
     margin-top: 1rem;
     padding: 1rem;
 }
