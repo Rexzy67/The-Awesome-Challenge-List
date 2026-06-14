@@ -2,9 +2,10 @@ import routes from './routes.js';
 
 function getStoredDarkMode() {
     try {
-        return JSON.parse(localStorage.getItem('dark')) || false;
+        const storedDarkMode = localStorage.getItem('dark');
+        return storedDarkMode === null ? true : JSON.parse(storedDarkMode);
     } catch {
-        return false;
+        return true;
     }
 }
 
