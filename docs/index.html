@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>TaCL Documentation</title>
+
+        <link rel="icon" href="/list_icon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/css/typography.css" />
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/css/components/nav.css" />
+        <link rel="stylesheet" type="text/css" href="/css/pages/docs.css" />
+    </head>
+    <body>
+        <header class="dark">
+            <div class="logo">
+                <h2>TaCL</h2>
+                <p>v1.0.0</p>
+            </div>
+            <nav class="nav">
+                <a class="nav__tab" href="/">
+                    <span class="type-label-lg">List</span>
+                </a>
+                <a class="nav__tab" href="/#/leaderboard">
+                    <span class="type-label-lg">Leaderboard</span>
+                </a>
+                <a class="nav__tab" href="/#/roulette">
+                    <span class="type-label-lg">Roulette</span>
+                </a>
+                <a class="nav__tab" href="/docs/" aria-current="page">
+                    <span class="type-label-lg">Docs</span>
+                </a>
+                <div class="nav__actions">
+                    <button
+                        class="nav__icon"
+                        type="button"
+                        aria-label="Toggle dark mode"
+                        data-theme-toggle
+                    >
+                        <img data-theme-icon src="/assets/light.svg" alt="" />
+                    </button>
+                    <a
+                        class="nav__icon"
+                        href="https://discord.gg/gZxmCHQWNB"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Join the Discord"
+                    >
+                        <img src="/assets/discord.svg" alt="Discord Logo" />
+                    </a>
+                    <a
+                        class="nav__cta type-label-lg"
+                        href="https://discord.com/invite/XrADRcgUpt"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Submit Record
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <main class="page-docs dark">
+            <div class="docs-shell">
+                <div class="docs-header">
+                    <h1>Documentation</h1>
+                    <p>
+                        Rules, list behavior, and editor notes for The Awesome
+                        Challenge List.
+                    </p>
+                </div>
+
+                <div class="docs-layout">
+                    <nav class="docs-toc" aria-label="Documentation sections">
+                        <a href="#using-the-list">Using the list</a>
+                        <a href="#submitting-records">Submitting records</a>
+                        <a href="#roulette">Roulette</a>
+                        <a href="#editing-data">Editing data</a>
+                        <a href="#contact">Contact</a>
+                    </nav>
+
+                    <div class="docs-content">
+                        <section class="doc-section" id="using-the-list">
+                            <h2>Using the list</h2>
+                            <p>
+                                The list page shows every ranked challenge,
+                                accepted records, verifier credits, level IDs,
+                                passwords, and verification videos.
+                            </p>
+                            <ul>
+                                <li>
+                                    Main list levels are ranks 1 through 75.
+                                </li>
+                                <li>
+                                    Extended list levels are ranks 76 through
+                                    150.
+                                </li>
+                                <li>
+                                    Legacy levels stay visible for history, but
+                                    they do not accept new records after the
+                                    grace period ends.
+                                </li>
+                            </ul>
+                            <p class="doc-note">
+                                Use the search and rank filters on the list page
+                                to narrow results by level, creator, verifier,
+                                ID, or list section.
+                            </p>
+                        </section>
+
+                        <section class="doc-section" id="submitting-records">
+                            <h2>Submitting records</h2>
+                            <p>
+                                Main list records must meet the listed qualify
+                                percentage. Extended list records must be full
+                                completions.
+                            </p>
+                            <ol>
+                                <li>
+                                    Do not use hacks. FPS bypass is allowed up
+                                    to 360 FPS.
+                                </li>
+                                <li>
+                                    Play the exact level ID shown on the list.
+                                </li>
+                                <li>
+                                    Include source audio, clicks, or taps in the
+                                    video.
+                                </li>
+                                <li>
+                                    Show the previous attempt and the full death
+                                    animation before the completion, unless the
+                                    completion is on the first attempt.
+                                </li>
+                                <li>
+                                    Show the player hitting the endwall.
+                                </li>
+                                <li>
+                                    Do not use secret routes, bug routes, or
+                                    easy modes.
+                                </li>
+                            </ol>
+                            <p class="doc-note">
+                                When a level falls to Legacy, records are
+                                accepted for 24 hours after it falls off. After
+                                that, new records are closed.
+                            </p>
+                        </section>
+
+                        <section class="doc-section" id="roulette">
+                            <h2>Roulette</h2>
+                            <p>
+                                Roulette creates randomized practice runs from
+                                the available list data. It skips levels that do
+                                not have a playable verification video yet.
+                            </p>
+                            <p>
+                                Roulette progress is saved locally in the
+                                browser, and runs can be imported or exported
+                                when you want to move them between devices.
+                            </p>
+                        </section>
+
+                        <section class="doc-section" id="editing-data">
+                            <h2>Editing data</h2>
+                            <p>
+                                The public list order lives in
+                                <code>data/_list.json</code>. Each listed entry
+                                points to a level JSON file in <code>data/</code>
+                                with the same name.
+                            </p>
+                            <h3>Level files</h3>
+                            <p>
+                                Use <code>data/_example.json</code> as the shape
+                                for new challenge entries. Listed levels should
+                                include ID, name, author, creators, verifier,
+                                verification, percent to qualify, password, and
+                                records.
+                            </p>
+                            <h3>Editor metadata</h3>
+                            <p>
+                                Editor credits live in
+                                <code>data/_editors.json</code>. Supported roles
+                                are <code>owner</code>, <code>admin</code>,
+                                <code>helper</code>, <code>dev</code>, and
+                                <code>trial</code>.
+                            </p>
+                            <h3>Validation</h3>
+                            <p>
+                                Run <code>python3 scripts/validate_data.py</code>
+                                before submitting data changes.
+                            </p>
+                        </section>
+
+                        <section class="doc-section" id="contact">
+                            <h2>Contact</h2>
+                            <p>
+                                For records, feedback, and list discussion, use
+                                the Discord links in the site header or contact
+                                Rexzy at
+                                <a href="mailto:rexzy62@proton.me">
+                                    rexzy62@proton.me
+                                </a>.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script type="module">
+            import {
+                getStoredDarkMode,
+                setStoredDarkMode,
+            } from "/js/theme.js";
+
+            const header = document.querySelector("header");
+            const main = document.querySelector("main");
+            const toggle = document.querySelector("[data-theme-toggle]");
+            const icon = document.querySelector("[data-theme-icon]");
+
+            function renderTheme(dark) {
+                header.classList.toggle("dark", dark);
+                main.classList.toggle("dark", dark);
+                icon.src = dark ? "/assets/light.svg" : "/assets/dark.svg";
+                document.documentElement.style.colorScheme = dark
+                    ? "dark"
+                    : "light";
+            }
+
+            let dark = getStoredDarkMode();
+            renderTheme(dark);
+
+            toggle.addEventListener("click", () => {
+                dark = !dark;
+                setStoredDarkMode(dark);
+                renderTheme(dark);
+            });
+        </script>
+    </body>
+</html>
