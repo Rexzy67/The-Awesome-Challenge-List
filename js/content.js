@@ -5,25 +5,39 @@ import { round, score } from './score.js';
  */
 const dir = '/data';
 
+function normalizeLevel(level, path) {
+    return {
+        ...level,
+        path,
+        percentToQualify: Number(level.percentToQualify),
+        records: Array.isArray(level.records)
+            ? level.records
+                .map((record) => ({
+                    ...record,
+                    percent: Number(record.percent),
+                    hz: Number(record.hz),
+                }))
+                .sort((a, b) => b.percent - a.percent)
+            : [],
+    };
+}
+
+function getCanonicalName(map, name) {
+    return Object.keys(map).find(
+        (user) => user.toLowerCase() === name.toLowerCase(),
+    ) || name;
+}
+
 export async function fetchList() {
-    const listResult = await fetch(`${dir}/_list.json`);
     try {
+        const listResult = await fetch(`${dir}/_list.json`);
         const list = await listResult.json();
         return await Promise.all(
             list.map(async (path, rank) => {
-                const levelResult = await fetch(`${dir}/${path}.json`);
                 try {
+                    const levelResult = await fetch(`${dir}/${path}.json`);
                     const level = await levelResult.json();
-                    return [
-                        {
-                            ...level,
-                            path,
-                            records: level.records.sort(
-                                (a, b) => b.percent - a.percent,
-                            ),
-                        },
-                        null,
-                    ];
+                    return [normalizeLevel(level, path), null];
                 } catch {
                     console.error(`Failed to load level #${rank + 1} ${path}.`);
                     return [null, path];
@@ -48,6 +62,9 @@ export async function fetchEditors() {
 
 export async function fetchLeaderboard() {
     const list = await fetchList();
+    if (!list) {
+        return [[], ['_list']];
+    }
 
     const scoreMap = {};
     const errs = [];
@@ -58,9 +75,7 @@ export async function fetchLeaderboard() {
         }
 
         // Verification
-        const verifier = Object.keys(scoreMap).find(
-            (u) => u.toLowerCase() === level.verifier.toLowerCase(),
-        ) || level.verifier;
+        const verifier = getCanonicalName(scoreMap, level.verifier);
         scoreMap[verifier] ??= {
             verified: [],
             completed: [],
@@ -76,9 +91,7 @@ export async function fetchLeaderboard() {
 
         // Records
         level.records.forEach((record) => {
-            const user = Object.keys(scoreMap).find(
-                (u) => u.toLowerCase() === record.user.toLowerCase(),
-            ) || record.user;
+            const user = getCanonicalName(scoreMap, record.user);
             scoreMap[user] ??= {
                 verified: [],
                 completed: [],

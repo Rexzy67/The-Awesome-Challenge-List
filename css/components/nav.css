@@ -8,6 +8,8 @@
 .nav {
     display: flex;
     column-gap: 2rem;
+    row-gap: 0.5rem;
+    flex-wrap: wrap;
 }
 .nav .nav__tab {
     padding-top: 4px;
@@ -28,6 +30,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 0.25rem;
+    min-width: max-content;
 }
 .nav .nav__actions .nav__icon {
     height: 3rem;
@@ -58,4 +62,29 @@
 }
 .nav .nav__actions .nav__cta:hover:not(:active) {
     transform: translateY(-2px);
+}
+
+@media screen and (max-width: 700px) {
+    .nav {
+        column-gap: 0.25rem;
+    }
+
+    .nav .nav__tab {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-width: max-content;
+        padding-inline: 0.75rem;
+    }
+
+    .nav .nav__actions {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+        min-width: 0;
+    }
+
+    .nav .nav__actions .nav__cta {
+        margin-left: 0.5rem;
+        padding-inline: 0.75rem;
+        text-align: center;
+    }
 }

@@ -13,7 +13,7 @@ export default {
         <main v-else class="page-roulette">
             <div class="sidebar">
                 <p class="type-label-md" style="color: #aaa">
-                    Shameless copy of the Extreme Demon Roulette by <a href="https://matcool.github.io/extreme-demon-roulette/" target="_blank">matcool</a>.
+                    Shameless copy of the Extreme Demon Roulette by <a href="https://matcool.github.io/extreme-demon-roulette/" target="_blank" rel="noopener noreferrer">matcool</a>.
                 </p>
                 <form class="options">
                     <div class="check">
@@ -24,7 +24,7 @@ export default {
                         <input type="checkbox" id="extended" value="Extended List" v-model="useExtendedList">
                         <label for="extended">Extended List</label>
                     </div>
-                    <Btn @click.native.prevent="onStart">{{ levels.length === 0 ? 'Start' : 'Restart'}}</Btn>
+                    <Btn :disabled="!useMainList && !useExtendedList" @click.prevent="onStart">{{ levels.length === 0 ? 'Start' : 'Restart'}}</Btn>
                 </form>
                 <p class="type-label-md" style="color: #aaa">
                     The roulette saves automatically.
@@ -32,8 +32,8 @@ export default {
                 <form class="save">
                     <p>Manual Load/Save</p>
                     <div class="btns">
-                        <Btn @click.native.prevent="onImport">Import</Btn>
-                        <Btn :disabled="!isActive" @click.native.prevent="onExport">Export</Btn>
+                        <Btn @click.prevent="onImport">Import</Btn>
+                        <Btn :disabled="!isActive" @click.prevent="onExport">Export</Btn>
                     </div>
                 </form>
             </div>
@@ -42,7 +42,7 @@ export default {
                     <template v-if="levels.length > 0">
                         <!-- Completed Levels -->
                         <div class="level" v-for="(level, i) in levels.slice(0, progression.length)">
-                            <a :href="level.video" class="video">
+                            <a :href="level.video" target="_blank" rel="noopener noreferrer" class="video">
                                 <img :src="getThumbnailFromId(getYoutubeIdFromUrl(level.video))" alt="">
                             </a>
                             <div class="meta">
@@ -53,7 +53,7 @@ export default {
                         </div>
                         <!-- Current Level -->
                         <div class="level" v-if="!hasCompleted">
-                            <a :href="currentLevel.video" target="_blank" class="video">
+                            <a :href="currentLevel.video" target="_blank" rel="noopener noreferrer" class="video">
                                 <img :src="getThumbnailFromId(getYoutubeIdFromUrl(currentLevel.video))" alt="">
                             </a>
                             <div class="meta">
@@ -62,9 +62,9 @@ export default {
                                 <p>{{ currentLevel.id }}</p>
                             </div>
                             <form class="actions" v-if="!givenUp">
-                                <input type="number" v-model="percentage" :placeholder="placeholder" :min="currentPercentage + 1" max=100>
-                                <Btn @click.native.prevent="onDone">Done</Btn>
-                                <Btn @click.native.prevent="onGiveUp" style="background-color: #e91e63;">Give Up</Btn>
+                                <input type="number" v-model.number="percentage" :placeholder="placeholder" :min="currentPercentage + 1" max=100>
+                                <Btn :disabled="!canSubmitPercentage" @click.prevent="onDone">Done</Btn>
+                                <Btn @click.prevent="onGiveUp" style="background-color: #e91e63;">Give Up</Btn>
                             </form>
                         </div>
                         <!-- Results -->
@@ -72,12 +72,12 @@ export default {
                             <h1>Results</h1>
                             <p>Number of levels: {{ progression.length }}</p>
                             <p>Highest percent: {{ currentPercentage }}%</p>
-                            <Btn v-if="currentPercentage < 99 && !hasCompleted" @click.native.prevent="showRemaining = true">Show remaining levels</Btn>
+                            <Btn v-if="currentPercentage < 99 && !hasCompleted" @click.prevent="showRemaining = true">Show remaining levels</Btn>
                         </div>
                         <!-- Remaining Levels -->
                         <template v-if="givenUp && showRemaining">
                             <div class="level" v-for="(level, i) in levels.slice(progression.length + 1, levels.length - currentPercentage + progression.length)">
-                                <a :href="level.video" target="_blank" class="video">
+                                <a :href="level.video" target="_blank" rel="noopener noreferrer" class="video">
                                     <img :src="getThumbnailFromId(getYoutubeIdFromUrl(level.video))" alt="">
                                 </a>
                                 <div class="meta">
@@ -116,18 +116,25 @@ export default {
         this.fileInput = document.createElement('input');
         this.fileInput.type = 'file';
         this.fileInput.multiple = false;
-        this.fileInput.accept = '.json';
+        this.fileInput.accept = '.json,application/json';
         this.fileInput.addEventListener('change', this.onImportUpload);
 
         // Load progress from local storage
-        const roulette = JSON.parse(localStorage.getItem('roulette'));
+        let roulette;
+        try {
+            roulette = JSON.parse(localStorage.getItem('roulette'));
+        } catch {
+            localStorage.removeItem('roulette');
+            return;
+        }
 
         if (!roulette) {
             return;
         }
 
-        this.levels = roulette.levels;
-        this.progression = roulette.progression;
+        if (!this.applyRoulette(roulette, false)) {
+            localStorage.removeItem('roulette');
+        }
     },
     computed: {
         currentLevel() {
@@ -141,16 +148,25 @@ export default {
         },
         hasCompleted() {
             return (
-                this.progression[this.progression.length - 1] >= 100 ||
-                this.progression.length === this.levels.length
+                this.levels.length > 0 &&
+                (
+                    this.progression[this.progression.length - 1] >= 100 ||
+                    this.progression.length === this.levels.length
+                )
             );
         },
         isActive() {
             return (
+                this.levels.length > 0 &&
                 this.progression.length > 0 &&
                 !this.givenUp &&
                 !this.hasCompleted
             );
+        },
+        canSubmitPercentage() {
+            return Number.isInteger(this.percentage)
+                && this.percentage > this.currentPercentage
+                && this.percentage <= 100;
         },
     },
     methods: {
@@ -170,6 +186,11 @@ export default {
             this.loading = true;
 
             const fullList = await fetchList();
+            if (!fullList) {
+                this.loading = false;
+                this.showToast('Failed to load the list.');
+                return;
+            }
 
             if (fullList.filter(([_, err]) => err).length > 0) {
                 this.loading = false;
@@ -184,11 +205,16 @@ export default {
                 id: lvl.id,
                 name: lvl.name,
                 video: lvl.verification,
-            }));
+            })).filter((level) => getYoutubeIdFromUrl(level.video));
             const list = [];
             if (this.useMainList) list.push(...fullListMapped.slice(0, 75));
             if (this.useExtendedList) {
                 list.push(...fullListMapped.slice(75, 150));
+            }
+            if (list.length === 0) {
+                this.loading = false;
+                this.showToast('No levels are available for the selected ranges.');
+                return;
             }
 
             // random 100 levels
@@ -198,6 +224,7 @@ export default {
             this.progression = [];
             this.percentage = undefined;
 
+            this.save();
             this.loading = false;
         },
         save() {
@@ -210,14 +237,7 @@ export default {
             );
         },
         onDone() {
-            if (!this.percentage) {
-                return;
-            }
-
-            if (
-                this.percentage <= this.currentPercentage ||
-                this.percentage > 100
-            ) {
+            if (!this.canSubmitPercentage) {
                 this.showToast('Invalid percentage.');
                 return;
             }
@@ -241,35 +261,32 @@ export default {
                 return;
             }
 
-            this.fileInput.showPicker();
+            if (typeof this.fileInput.showPicker === 'function') {
+                this.fileInput.showPicker();
+                return;
+            }
+
+            this.fileInput.click();
         },
         async onImportUpload() {
             if (this.fileInput.files.length === 0) return;
 
             const file = this.fileInput.files[0];
 
-            if (file.type !== 'application/json') {
+            if (file.type && file.type !== 'application/json') {
                 this.showToast('Invalid file.');
+                this.fileInput.value = '';
                 return;
             }
 
             try {
                 const roulette = JSON.parse(await file.text());
-
-                if (!roulette.levels || !roulette.progression) {
-                    this.showToast('Invalid file.');
-                    return;
-                }
-
-                this.levels = roulette.levels;
-                this.progression = roulette.progression;
-                this.save();
-                this.givenUp = false;
-                this.showRemaining = false;
-                this.percentage = undefined;
+                this.applyRoulette(roulette);
             } catch {
                 this.showToast('Invalid file.');
                 return;
+            } finally {
+                this.fileInput.value = '';
             }
         },
         onExport() {
@@ -282,9 +299,67 @@ export default {
             );
             const a = document.createElement('a');
             a.href = URL.createObjectURL(file);
-            a.download = 'tsl_roulette';
+            a.download = 'tacl_roulette.json';
             a.click();
             URL.revokeObjectURL(a.href);
+        },
+        applyRoulette(roulette, showErrors = true) {
+            const result = this.validateRoulette(roulette);
+            if (!result.valid) {
+                if (showErrors) {
+                    this.showToast(result.message);
+                }
+                return false;
+            }
+
+            this.levels = result.levels;
+            this.progression = result.progression;
+            this.save();
+            this.givenUp = false;
+            this.showRemaining = false;
+            this.percentage = undefined;
+            return true;
+        },
+        validateRoulette(roulette) {
+            if (!roulette || typeof roulette !== 'object') {
+                return { valid: false, message: 'Invalid file.' };
+            }
+
+            if (!Array.isArray(roulette.levels) || !Array.isArray(roulette.progression)) {
+                return { valid: false, message: 'Invalid file.' };
+            }
+
+            if (roulette.progression.length > roulette.levels.length) {
+                return { valid: false, message: 'Invalid save progress.' };
+            }
+
+            const levels = roulette.levels.map((level) => ({
+                rank: Number(level.rank),
+                id: Number(level.id),
+                name: String(level.name || ''),
+                video: String(level.video || ''),
+            }));
+            if (levels.some((level) => (
+                !Number.isInteger(level.rank)
+                || !Number.isFinite(level.id)
+                || level.name.length === 0
+                || !getYoutubeIdFromUrl(level.video)
+            ))) {
+                return { valid: false, message: 'Invalid level data.' };
+            }
+
+            const progression = roulette.progression.map(Number);
+            const hasInvalidProgress = progression.some((percent, index) => (
+                !Number.isInteger(percent)
+                || percent <= 0
+                || percent > 100
+                || percent <= (progression[index - 1] || 0)
+            ));
+            if (hasInvalidProgress) {
+                return { valid: false, message: 'Invalid save progress.' };
+            }
+
+            return { valid: true, levels, progression };
         },
         showToast(msg) {
             this.toasts.push(msg);

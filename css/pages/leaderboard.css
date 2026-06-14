@@ -30,6 +30,20 @@
 .page-leaderboard .board-container {
     padding-inline: 1rem;
 }
+.page-leaderboard .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+.page-leaderboard .filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.page-leaderboard .filters p {
+    color: var(--color-muted);
+}
 .page-leaderboard .board {
     table-layout: auto;
     display: block;
@@ -47,6 +61,7 @@
     width: 100%;
 }
 .page-leaderboard .board .user button {
+    width: 100%;
     background-color: var(--color-background);
     color: var(--color-on-background);
     border: none;
@@ -71,6 +86,28 @@
     gap: 2rem;
     padding-right: 2rem;
 }
+.page-leaderboard .player.empty {
+    justify-content: center;
+    min-height: 12rem;
+    color: var(--color-muted);
+}
+.page-leaderboard .player .summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(7rem, 1fr));
+    gap: 1rem;
+}
+.page-leaderboard .player .summary li {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+.page-leaderboard .player .summary span {
+    color: var(--color-muted);
+}
+.page-leaderboard .player .summary p {
+    margin-top: 0.75rem;
+}
 .page-leaderboard .player .table {
     table-layout: fixed;
 }
@@ -78,7 +115,8 @@
     padding-right: 2rem;
 }
 .page-leaderboard .player .table p,
-.page-leaderboard .player .table a {
+.page-leaderboard .player .table a,
+.page-leaderboard .player .table span {
     padding-block: 1rem;
 }
 .page-leaderboard .player .table .rank p,
@@ -90,4 +128,44 @@
 }
 .page-leaderboard .player .table a:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 900px) {
+    .page-leaderboard {
+        display: block;
+        height: auto;
+        max-width: none;
+    }
+
+    .page-leaderboard > div {
+        overflow-y: visible;
+    }
+
+    .page-leaderboard .board-container,
+    .page-leaderboard .player-container {
+        padding: 1rem;
+    }
+
+    .page-leaderboard .player {
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .page-leaderboard .board .rank,
+    .page-leaderboard .board .total {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .page-leaderboard .board .user button {
+        padding: 0.75rem;
+    }
+
+    .page-leaderboard .player .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .page-leaderboard .player .table tr td:not(:last-child) {
+        padding-right: 0.75rem;
+    }
 }

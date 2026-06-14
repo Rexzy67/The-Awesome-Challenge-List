@@ -12,6 +12,23 @@
 
 .page-list .list {
     table-layout: auto;
+    width: 100%;
+}
+.page-list .filters {
+    display: grid;
+    grid-template-columns: minmax(12rem, 1fr) minmax(10rem, max-content);
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1rem;
+}
+.page-list .filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.page-list .filters p {
+    grid-column: 1 / span 2;
+    color: var(--color-muted);
 }
 .page-list .list .rank {
     text-align: end;
@@ -21,6 +38,7 @@
     width: 100%;
 }
 .page-list .list .level button {
+    width: 100%;
     background-color: var(--color-background);
     color: var(--color-on-background);
     border: none;
@@ -58,13 +76,44 @@
     gap: 1rem;
 }
 .page-list .level-container .level .video {
+    width: 100%;
     aspect-ratio: 16/9;
+}
+.page-list .level-container .level .video-placeholder {
+    aspect-ratio: 16/9;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-muted);
+}
+.page-list .level-container .level .video-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.page-list .level-container .level .video-actions button {
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background-color: var(--color-surface);
+    color: var(--color-on-background);
+    cursor: pointer;
+    padding: 0.65rem 1rem;
+}
+.page-list .level-container .level .video-actions button.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-on-primary);
 }
 .page-list .level-container .level .stats {
     display: flex;
     justify-content: space-evenly;
     text-align: center;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 .page-list .level-container .level .stats li {
     display: flex;
@@ -125,4 +174,44 @@
 }
 .page-list .meta .editors li a:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 900px) {
+    .page-list .list-container,
+    .page-list .level-container,
+    .page-list .meta-container {
+        padding: 1rem;
+    }
+
+    .page-list .meta-container {
+        padding-top: 0;
+    }
+
+    .page-list .level-container .level {
+        max-width: none;
+        padding-right: 0;
+    }
+
+    .page-list .level-container .level .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .page-list .filters {
+        grid-template-columns: 1fr;
+    }
+
+    .page-list .filters p {
+        grid-column: auto;
+    }
+
+    .page-list .list .rank {
+        padding-right: 0.5rem;
+    }
+
+    .page-list .list .level button {
+        padding: 0.75rem;
+    }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=1024" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
             The awesome Challenge List
         </title>
@@ -55,6 +55,8 @@
                 <div class="nav__actions">
                     <button
                         class="nav__icon"
+                        type="button"
+                        aria-label="Toggle dark mode"
                         @click.prevent="store.toggleDark()"
                     >
                         <img
@@ -62,15 +64,16 @@
                             alt=""
                         />
                     </button>
-                    <a class="nav__icon" href="https://discord.gg/gZxmCHQWNB" target="_blank">
+                    <a class="nav__icon" href="https://discord.gg/gZxmCHQWNB" target="_blank" rel="noopener noreferrer" aria-label="Join the Discord">
                         <img src="/assets/discord.svg" alt="Discord Logo" />
                     </a>
                     <a
                         class="nav__cta type-label-lg"
                         href="https://discord.com/invite/XrADRcgUpt"
                         target="_blank"
-                        >Submit Record</a
-                    >
+                        rel="noopener noreferrer">
+                        Submit Record
+                    </a>
                 </div>
             </nav>
         </header>

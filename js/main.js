@@ -1,7 +1,15 @@
 import routes from './routes.js';
 
+function getStoredDarkMode() {
+    try {
+        return JSON.parse(localStorage.getItem('dark')) || false;
+    } catch {
+        return false;
+    }
+}
+
 export const store = Vue.reactive({
-    dark: JSON.parse(localStorage.getItem('dark')) || false,
+    dark: getStoredDarkMode(),
     toggleDark() {
         this.dark = !this.dark;
         localStorage.setItem('dark', JSON.stringify(this.dark));
