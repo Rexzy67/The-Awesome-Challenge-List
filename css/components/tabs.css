@@ -1,31 +1,31 @@
 .tabs {
     display: flex;
     background: var(--gradient-acrylic);
-    border: 1px solid var(--color-border);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-inset);
+    border: var(--glass-border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-glass);
     overflow: hidden;
     -webkit-backdrop-filter: var(--effect-acrylic);
     backdrop-filter: var(--effect-acrylic);
 }
 
-.tabs .tab{
+.tabs .tab {
     border: none;
     cursor: pointer;
     font: inherit;
-    padding: 1rem;
+    padding: 0.9rem 1rem;
     margin: 0;
     background-color: transparent;
     color: var(--color-on-background);
     border-bottom: 3px solid transparent;
-    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
 }
 
-.tabs .tab.selected{
-    background-color: color-mix(in srgb, var(--color-secondary) 14%, transparent);
+.tabs .tab.selected {
+    background-color: color-mix(in srgb, var(--color-secondary) 18%, transparent);
     border-bottom: 3px solid var(--color-secondary);
 }
 
-.tabs .tab:hover{
+.tabs .tab:hover {
     background-color: var(--color-background-hover);
 }

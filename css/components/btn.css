@@ -1,27 +1,36 @@
 .btn {
-    border: 1px solid color-mix(in srgb, var(--color-secondary) 42%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 46%, var(--glass-highlight));
     cursor: pointer;
     font: inherit;
-    padding: 1rem;
+    padding: 0.9rem 1rem;
     margin: 0;
     background: var(--gradient-active);
     color: var(--color-on-primary);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-sm);
-    transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+    border-radius: var(--radius-control);
+    box-shadow: var(--shadow-inset), var(--shadow-sm);
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
+    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease, border-color 140ms ease, filter 140ms ease;
 }
 
 .btn:disabled {
-    opacity: 0.5;
+    opacity: 0.52;
     cursor: not-allowed;
+    filter: saturate(0.75);
 }
 
 .btn:not(:disabled):hover:not(:active) {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-inset), var(--shadow-md);
+}
+
+.btn:not(:disabled):active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-inset), var(--shadow-sm);
 }
 
 .btn.btn-danger {
-    background: linear-gradient(135deg, var(--color-error), var(--color-accent));
+    background: var(--gradient-danger);
+    border-color: color-mix(in srgb, var(--color-error) 48%, var(--glass-highlight));
     color: var(--color-on-error);
 }

@@ -11,9 +11,9 @@
 
 .docs-header {
     background: var(--gradient-acrylic);
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-md);
+    border: var(--glass-border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-glass);
     padding: 1.5rem;
     -webkit-backdrop-filter: var(--effect-acrylic);
     backdrop-filter: var(--effect-acrylic);
@@ -35,15 +35,15 @@
 
 .docs-toc {
     position: sticky;
-    top: 1rem;
+    top: 6rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     background: var(--gradient-acrylic);
-    border: 1px solid var(--color-border);
+    border: var(--glass-border);
     border-left: 3px solid color-mix(in srgb, var(--color-secondary) 70%, var(--color-border));
-    border-radius: 0.875rem;
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-glass);
     padding: 1rem;
     -webkit-backdrop-filter: var(--effect-acrylic);
     backdrop-filter: var(--effect-acrylic);
@@ -51,12 +51,14 @@
 
 .docs-toc a {
     color: var(--color-muted);
-    padding-block: 0.25rem;
+    border-radius: var(--radius-control);
+    padding: 0.35rem 0.5rem;
+    transition: background 140ms ease, color 140ms ease;
 }
 
 .docs-toc a:hover {
+    background: var(--color-background-hover);
     color: var(--color-on-background);
-    text-decoration: underline;
 }
 
 .docs-content {
@@ -110,19 +112,21 @@
 }
 
 .doc-section code {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+    border: var(--glass-border);
     border-radius: 0.375rem;
     padding: 0.1rem 0.3rem;
 }
 
 .doc-note {
     background: var(--gradient-acrylic);
-    border: 1px solid var(--color-border);
-    border-radius: 0.875rem;
+    border: var(--glass-border);
+    border-radius: var(--radius-panel);
     box-shadow: var(--shadow-inset);
     margin-top: 1rem;
     padding: 1rem;
+    -webkit-backdrop-filter: var(--effect-acrylic);
+    backdrop-filter: var(--effect-acrylic);
 }
 
 @media screen and (max-width: 900px) {

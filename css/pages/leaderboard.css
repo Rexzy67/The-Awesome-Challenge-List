@@ -1,6 +1,7 @@
 .page-leaderboard-container {
     display: block;
 }
+
 .page-leaderboard {
     height: 100%;
     display: grid;
@@ -10,153 +11,197 @@
     max-width: 80rem;
     margin: 0 auto;
 }
+
 .page-leaderboard > div {
     overflow-y: auto;
 }
+
 .page-leaderboard .error-container {
     grid-row: 1;
     grid-column: 1 / span 2;
 }
+
 .page-leaderboard .error-container .error {
     padding: 1rem;
-    background: linear-gradient(135deg, var(--color-error), color-mix(in srgb, var(--color-error) 70%, var(--color-accent)));
+    background: var(--gradient-danger);
     color: var(--color-on-error);
-    border-radius: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-error) 42%, var(--glass-highlight));
+    border-radius: var(--radius-panel);
     box-shadow: var(--shadow-sm);
 }
+
 .page-leaderboard .board-container,
 .page-leaderboard .player-container {
     grid-row: 2;
     padding-block: 2rem;
 }
+
 .page-leaderboard .board-container {
     padding-inline: 1rem;
-    background: var(--color-surface-muted);
+    background:
+        linear-gradient(90deg, var(--color-surface-muted), color-mix(in srgb, var(--color-surface-muted) 38%, transparent)),
+        color-mix(in srgb, var(--color-surface-muted) 70%, transparent);
     border-right: 1px solid var(--color-border);
+    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.16);
     -webkit-backdrop-filter: var(--effect-acrylic);
     backdrop-filter: var(--effect-acrylic);
 }
+
 .page-leaderboard .filters {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     margin-bottom: 1rem;
     background: var(--gradient-acrylic);
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
+    border: var(--glass-border);
+    border-radius: var(--radius-panel);
     padding: 1rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-glass);
     -webkit-backdrop-filter: var(--effect-acrylic);
     backdrop-filter: var(--effect-acrylic);
 }
+
 .page-leaderboard .filters label {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
+
 .page-leaderboard .filters p {
     color: var(--color-muted);
 }
+
 .page-leaderboard .board {
     table-layout: auto;
     display: block;
     width: 100%;
 }
+
 .page-leaderboard .board .rank {
     padding-block: 1rem;
     text-align: end;
     color: var(--color-muted);
+    white-space: nowrap;
 }
+
 .page-leaderboard .board .total {
     padding: 1rem;
     text-align: end;
     color: var(--color-muted);
+    white-space: nowrap;
 }
+
 .page-leaderboard .board .user {
     width: 100%;
 }
+
 .page-leaderboard .board .user button {
     width: 100%;
     background: transparent;
     color: var(--color-on-background);
     border: 1px solid transparent;
-    border-radius: 0.75rem;
-    padding: 1rem;
+    border-radius: var(--radius-control);
+    padding: 0.9rem 1rem;
     text-align: start;
     word-break: normal;
     overflow-wrap: anywhere;
-    transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
+    transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease, color 140ms ease, transform 140ms ease;
 }
+
 .page-leaderboard .board .user button:hover {
-    background-color: var(--color-background-hover);
+    background: var(--color-background-hover);
     border-color: var(--color-border);
     color: var(--color-on-background-hover);
     cursor: pointer;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-inset), var(--shadow-sm);
+    transform: translateY(-1px);
 }
+
 .page-leaderboard .board .user.active button {
     background: var(--gradient-active);
-    border-color: color-mix(in srgb, var(--color-secondary) 45%, transparent);
+    border-color: color-mix(in srgb, var(--color-secondary) 48%, transparent);
     color: white;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-inset), var(--shadow-sm);
 }
+
 .page-leaderboard .player {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     background: var(--gradient-acrylic);
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-md);
+    border: var(--glass-border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-glass);
     margin-right: 2rem;
     padding: 1.5rem;
+    overflow: hidden;
     -webkit-backdrop-filter: var(--effect-acrylic);
     backdrop-filter: var(--effect-acrylic);
 }
+
 .page-leaderboard .player.empty {
     justify-content: center;
     min-height: 12rem;
     color: var(--color-muted);
 }
+
 .page-leaderboard .player .summary {
     display: grid;
     grid-template-columns: repeat(3, minmax(7rem, 1fr));
     gap: 1rem;
 }
+
 .page-leaderboard .player .summary li {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 0.875rem;
+    background: color-mix(in srgb, var(--color-surface) 76%, transparent);
+    border: var(--glass-border);
+    border-radius: var(--radius-panel);
     padding: 1rem;
     box-shadow: var(--shadow-inset);
 }
+
 .page-leaderboard .player .summary span {
     color: var(--color-muted);
 }
+
 .page-leaderboard .player .summary p {
     margin-top: 0.75rem;
 }
+
 .page-leaderboard .player .table {
     table-layout: fixed;
 }
+
+.page-leaderboard .player .table tr {
+    border-top: 1px solid var(--color-border);
+}
+
+.page-leaderboard .player .table tr:first-child {
+    border-top: none;
+}
+
 .page-leaderboard .player .table tr td:not(:last-child) {
     padding-right: 2rem;
 }
+
 .page-leaderboard .player .table p,
 .page-leaderboard .player .table a,
 .page-leaderboard .player .table span {
     padding-block: 1rem;
 }
+
 .page-leaderboard .player .table .rank p,
 .page-leaderboard .player .table .score p {
     text-align: end;
     color: var(--color-muted);
 }
+
 .page-leaderboard .player .table .level {
     width: 100%;
 }
+
 .page-leaderboard .player .table a:hover {
     text-decoration: underline;
+    text-underline-offset: 0.18em;
 }
 
 @media screen and (max-width: 900px) {

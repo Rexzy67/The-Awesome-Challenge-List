@@ -1,29 +1,38 @@
 .nav {
     display: flex;
     align-items: stretch;
-    column-gap: 1rem;
+    column-gap: 0.5rem;
     row-gap: 0.5rem;
     flex-wrap: wrap;
 }
+
 .nav .nav__tab {
     display: flex;
     align-items: center;
-    border-bottom: 3px solid transparent;
-    color: rgba(255, 255, 255, 0.88);
-    padding: 0.35rem 0.65rem;
-    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+    border: 1px solid transparent;
+    border-radius: var(--radius-control);
+    color: rgba(255, 255, 255, 0.86);
+    min-height: 2.75rem;
+    padding: 0.35rem 0.75rem;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    transition: background 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
 }
+
 .nav .nav__tab.router-link-active,
 .nav .nav__tab[aria-current="page"] {
-    background-color: rgba(255, 255, 255, 0.16);
-    border-color: var(--color-on-primary);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.34);
     color: var(--color-on-primary);
+    box-shadow: var(--shadow-inset), 0 0.5rem 1.4rem rgba(10, 24, 48, 0.14);
 }
+
 .nav .nav__tab:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: var(--color-on-primary);
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.28);
     color: var(--color-on-primary);
+    transform: translateY(-1px);
 }
+
 .nav .nav__actions {
     flex: 1;
     display: flex;
@@ -32,54 +41,62 @@
     gap: 0.5rem;
     min-width: max-content;
 }
+
 .nav .nav__actions .nav__icon {
-    height: 3rem;
-    width: 3rem;
-    background-color: rgba(255, 255, 255, 0.14);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 50%;
+    height: 2.75rem;
+    width: 2.75rem;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: var(--radius-control);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-inset);
+    box-shadow: var(--shadow-inset), 0 0.5rem 1.4rem rgba(10, 24, 48, 0.12);
     -webkit-backdrop-filter: var(--effect-acrylic);
     backdrop-filter: var(--effect-acrylic);
-    transition: background-color 120ms ease, transform 120ms ease, border-color 120ms ease;
+    transition: background 140ms ease, transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
 }
+
 .nav .nav__actions .nav__icon:hover {
-    background-color: rgba(255, 255, 255, 0.24);
-    border-color: rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow: var(--shadow-inset), 0 0.7rem 1.7rem rgba(10, 24, 48, 0.18);
     transform: translateY(-1px);
 }
+
 .nav .nav__actions .nav__icon img {
-    height: 1.5rem;
+    height: 1.45rem;
 }
+
 .nav .nav__actions .nav__cta {
-    margin-left: 1rem;
-    padding: 0.95rem 1rem;
-    background: rgba(255, 255, 255, 0.92);
-    color: #142033;
-    border: 1px solid rgba(255, 255, 255, 0.42);
-    border-radius: 0.75rem;
-    box-shadow: 0 0.65rem 1.5rem rgba(10, 24, 48, 0.18);
-    transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+    margin-left: 0.75rem;
+    padding: 0.85rem 1rem;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.62)),
+        rgba(255, 255, 255, 0.78);
+    color: #102032;
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    border-radius: var(--radius-control);
+    box-shadow: var(--shadow-inset), 0 0.75rem 1.7rem rgba(10, 24, 48, 0.2);
+    transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
 }
+
 .nav .nav__actions .nav__cta:hover:not(:active) {
     transform: translateY(-2px);
-    box-shadow: 0 0.9rem 1.75rem rgba(10, 24, 48, 0.24);
+    box-shadow: var(--shadow-inset), 0 1rem 2rem rgba(10, 24, 48, 0.26);
 }
 
 @media screen and (max-width: 700px) {
     .nav {
-        column-gap: 0.25rem;
+        column-gap: 0.35rem;
     }
 
     .nav .nav__tab {
         flex: 1 1 auto;
         justify-content: center;
         min-width: max-content;
-        padding-inline: 0.75rem;
+        padding-inline: 0.65rem;
     }
 
     .nav .nav__actions {
@@ -89,7 +106,7 @@
     }
 
     .nav .nav__actions .nav__cta {
-        margin-left: 0.5rem;
+        margin-left: 0.25rem;
         padding-inline: 0.75rem;
         text-align: center;
     }
