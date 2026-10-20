@@ -1,0 +1,18 @@
+{
+    "id": 150681225,
+    "name": "The vacant stare.",
+    "author": "MRCL",
+    "creators": ["MRCL"],
+    "verifier": "MRCL",
+    "verification": "https://youtu.be/hrWfq9c7b0c",
+    "percentToQualify": "37",
+    "password": "Uncopylocked",
+    "records": [
+            {
+            "user": "Rexzy",
+            "link": "https://youtu.be/hrWfq9c7b0c",
+            "percent": 100,
+            "hz": 480
+            }
+    ]
+}
