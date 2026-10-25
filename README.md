@@ -102,11 +102,11 @@ scripts/validate_data.py
 
 TaCL is maintained by the list staff and contributors:
 
-- AcL, list owner
+- Rexzy, list owner and programmer
 - Blaze, list editor
-- Rexzy, list editor and coder
 
 The original site layout is credited to TheGDPSLayoutList and TheShittyList.
+visit the template at: <https://github.com/TheShittyList/GDListTemplate>
 
 ## Feedback
 
